@@ -1,0 +1,57 @@
+{
+  "name": "aaronheath/laravel-speed-test",
+  "description": "Perform scheduled tests to verify downstream bandwidth.",
+  "license": "MIT",
+  "keywords": ["laravel", "speed", "bandwidth"],
+  "authors": [
+    {
+      "name": "Aaron Heath",
+      "email": "aaron@aaronheath.com",
+      "homepage": "https://aaronheath.com"
+    }
+  ],
+  "require": {
+    "php": "^7.2.5",
+    "illuminate/support": "~5.7.0",
+    "guzzlehttp/guzzle": "~6.0",
+    "ext-json": "*",
+    "aaronheath/class-logger": "^0.0.1",
+    "aaronheath/oauth-client": "~0.0.3"
+  },
+  "autoload": {
+    "psr-4": {
+      "Heath\\BandwidthCheck\\": "src/"
+    }
+  },
+  "require-dev": {
+    "mockery/mockery": "^1.0",
+    "phpunit/phpunit": "~7.0",
+    "orchestra/testbench": "~3.7.0",
+    "sempro/phpunit-pretty-print": "^1.0",
+    "timacdonald/log-fake": "^1.6"
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Tests\\": "tests/"
+    }
+  },
+  "repositories": [
+    {
+      "type": "vcs",
+      "url": "https://github.com/aaronheath/class-logger"
+    },
+    {
+      "type": "vcs",
+      "url": "https://github.com/aaronheath/oauth-client"
+    }
+  ],
+
+  "minimum-stability": "stable",
+  "extra": {
+    "laravel": {
+      "providers": [
+        "BandwidthCheckServiceProvider"
+      ]
+    }
+  }
+}
