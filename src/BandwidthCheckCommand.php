@@ -27,9 +27,10 @@ class BandwidthCheckCommand extends Command
         $this->info('Results');
 
         $this->table(
-            ['Path', 'Filesize (MB)', 'Speed (Mbps)', 'Duration (sec)'],
+            ['URL', 'Filesize (MB)', 'Speed (Mbps)', 'Duration (sec)'],
             [
                 [
+                    Arr::get($results, 'download.url'),
                     Arr::get($results, 'download.size'),
                     Arr::get($results, 'download.speed'),
                     Arr::get($results, 'download.duration'),
