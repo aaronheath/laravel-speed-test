@@ -14,6 +14,7 @@ class BandwidthCheckCommandTest extends TestCase
     {
         $mockResult = [
             'download' => [
+                'url' => 'https://example.com/download/url',
                 'duration' => 10.3, // Seconds
                 'size' => 50, // MB
                 'speed' => 195.2, // Mbps

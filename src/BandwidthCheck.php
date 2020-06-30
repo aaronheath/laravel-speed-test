@@ -71,6 +71,7 @@ class BandwidthCheck
         return [
             'download' => [
                 'duration' => $downloadDuration, // Seconds
+                'url' => $this->downloadUrl,
                 'size' => $this->downloadSize, // MB
                 'speed' => $downloadSpeed, // Mbps
             ],

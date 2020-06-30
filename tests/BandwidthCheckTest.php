@@ -29,6 +29,7 @@ class BandwidthCheckTest extends TestCase
             $duration = Arr::get($options, 'json.download.duration');
             $speed = Arr::get($options, 'json.download.speed');
             $size = Arr::get($options, 'json.download.size');
+            $url = Arr::get($options, 'json.download.url');
 
             if ($duration < 1.99 || $duration > 2.5) {
                 return false;
@@ -39,6 +40,10 @@ class BandwidthCheckTest extends TestCase
             }
 
             if ($size != 50) {
+                return false;
+            }
+
+            if ($url != 'https://example.com/50MB.file') {
                 return false;
             }
 
@@ -59,10 +64,12 @@ class BandwidthCheckTest extends TestCase
         $duration = Arr::get($response, 'download.duration');
         $speed = Arr::get($response, 'download.speed');
         $size = Arr::get($response, 'download.size');
+        $url = Arr::get($response, 'download.url');
 
         $this->assertTrue($duration >= 1.99 && $duration < 2.5);
         $this->assertTrue($speed >= 199 && $speed <= 300);
         $this->assertEquals(50, $size);
+        $this->assertEquals('https://example.com/50MB.file', $url);
 
         collect([
             'Download speed was',
