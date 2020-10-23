@@ -11,12 +11,12 @@
     }
   ],
   "require": {
-    "php": "^7.2.5",
-    "illuminate/support": "~5.7.0",
+    "php": "^7.4.0",
+    "illuminate/support": "~5.8.0",
     "guzzlehttp/guzzle": "~6.0",
     "ext-json": "*",
-    "aaronheath/class-logger": "^0.0.1",
-    "aaronheath/oauth-client": "~0.0.3"
+    "aaronheath/class-logger": "^0.0.2",
+    "aaronheath/oauth-client": "~0.0.8"
   },
   "autoload": {
     "psr-4": {
@@ -25,8 +25,8 @@
   },
   "require-dev": {
     "mockery/mockery": "^1.0",
-    "phpunit/phpunit": "~7.0",
-    "orchestra/testbench": "~3.7.0",
+    "phpunit/phpunit": "~8.0",
+    "orchestra/testbench": "~3.8.0",
     "sempro/phpunit-pretty-print": "^1.0",
     "timacdonald/log-fake": "^1.6"
   },
