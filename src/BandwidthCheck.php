@@ -69,6 +69,7 @@ class BandwidthCheck
         $downloadSpeed = $this->toMbps($this->downloadSize, $downloadDuration);
 
         return [
+            'hostname' => gethostname(),
             'download' => [
                 'duration' => $downloadDuration, // Seconds
                 'url' => $this->downloadUrl,

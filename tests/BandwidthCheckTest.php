@@ -26,10 +26,15 @@ class BandwidthCheckTest extends TestCase
             ->with('https://example.com/50MB.file');
 
         $externalCallback = function ($options) {
+            $hostname = Arr::get($options, 'json.hostname');
             $duration = Arr::get($options, 'json.download.duration');
             $speed = Arr::get($options, 'json.download.speed');
             $size = Arr::get($options, 'json.download.size');
             $url = Arr::get($options, 'json.download.url');
+
+            if ($hostname != gethostname()) {
+                return false;
+            }
 
             if ($duration < 1.99 || $duration > 2.5) {
                 return false;
