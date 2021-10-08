@@ -15,8 +15,6 @@ class BandwidthCheck
     protected $enabled;
     protected $client;
     protected $oauthClient;
-    protected $downloadSize; // MB
-    protected $downloadUrl;
 
     public function __construct()
     {
@@ -25,8 +23,6 @@ class BandwidthCheck
 
         $this->enabled = config('bandwidth-check.enabled');
         $this->url = config('bandwidth-check.report_url');
-        $this->downloadSize = config('bandwidth-check.download_filesize');
-        $this->downloadUrl = config('bandwidth-check.download_url');
     }
 
     public function run()
@@ -35,7 +31,7 @@ class BandwidthCheck
             return;
         }
 
-        $results = $this->results($this->download());
+        $results = $this->results($this->performTest());
 
         $this->logResults($results);
 
@@ -49,31 +45,38 @@ class BandwidthCheck
         return $this->enabled;
     }
 
-    protected function download()
+    protected function performTest()
     {
-        $start = microtime(true);
+        $loop = 0;
+        $hasValidResult = false;
 
-        if(config('app.env') == 'testing') {
-            usleep(2000000);
-        }
+        do {
+            if($loop >= 5) {
+                throw new \Exception('Exeeded speed test attempts');
+            }
 
-        $this->client->get($this->downloadUrl);
+            $loop++;
 
-        $end = microtime(true);
+            $result = exec('speedtest --format=json');
 
-        return round($end - $start, 3);
+            if($result) {
+                $hasValidResult = true;
+            }
+        } while(! $hasValidResult);
+
+        return json_decode($result);
     }
 
-    protected function results($downloadDuration)
+    protected function results($rawResults)
     {
-        $downloadSpeed = $this->toMbps($this->downloadSize, $downloadDuration);
+        $downloadSpeed = round($rawResults->download->bandwidth * 0.000008, 3);
 
         return [
             'hostname' => gethostname(),
             'download' => [
-                'duration' => $downloadDuration, // Seconds
-                'url' => $this->downloadUrl,
-                'size' => $this->downloadSize, // MB
+                'duration' => $rawResults->download->elapsed / 1000, // Seconds
+                'url' => $rawResults->result->url,
+                'size' => round($rawResults->download->bytes / 1024 / 1024), // MB
                 'speed' => $downloadSpeed, // Mbps
             ],
         ];
@@ -86,11 +89,6 @@ class BandwidthCheck
                 $this->uri(),
                 $this->options($results)
             );
-    }
-
-    protected function toMbps($size, $duration)
-    {
-        return round(8 * ($size / $duration), 3);
     }
 
     protected function uri()
@@ -111,7 +109,7 @@ class BandwidthCheck
             'Download speed was %sMbps (%s sec) for %sMB file.',
             Arr::get($results, 'download.speed'),
             Arr::get($results, 'download.duration'),
-            $this->downloadSize
+            Arr::get($results, 'download.size')
         );
 
         $this->logInfo($msg);
