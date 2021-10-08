@@ -59,7 +59,7 @@ class BandwidthCheck
 
             $result = exec('speedtest --format=json');
 
-            if($result) {
+            if($result && property_exists($result, 'download')) {
                 $hasValidResult = true;
             }
         } while(! $hasValidResult);
