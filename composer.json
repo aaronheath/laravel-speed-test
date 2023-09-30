@@ -11,12 +11,12 @@
     }
   ],
   "require": {
-    "php": "^7.2.5",
-    "illuminate/support": "~5.7.0",
-    "guzzlehttp/guzzle": "~6.0",
+    "php": "^8.2.0",
+    "illuminate/support": "^10.0.0",
+    "guzzlehttp/guzzle": "^7.8.0",
     "ext-json": "*",
-    "aaronheath/class-logger": "^0.0.1",
-    "aaronheath/oauth-client": "~0.0.3"
+    "aaronheath/class-logger": "^1.2.0",
+    "aaronheath/oauth-client": "dev-20230919-laravel-10"
   },
   "autoload": {
     "psr-4": {
@@ -24,34 +24,28 @@
     }
   },
   "require-dev": {
-    "mockery/mockery": "^1.0",
-    "phpunit/phpunit": "~7.0",
-    "orchestra/testbench": "~3.7.0",
+    "mockery/mockery": "^1.5.0",
+    "phpunit/phpunit": "^10.0.0",
+    "orchestra/testbench": "^8.0.0",
     "sempro/phpunit-pretty-print": "^1.0",
-    "timacdonald/log-fake": "^1.6"
+    "timacdonald/log-fake": "^2.0.0"
   },
   "autoload-dev": {
     "psr-4": {
       "Tests\\": "tests/"
     }
   },
-  "repositories": [
-    {
-      "type": "vcs",
-      "url": "https://github.com/aaronheath/class-logger"
-    },
-    {
-      "type": "vcs",
-      "url": "https://github.com/aaronheath/oauth-client"
-    }
-  ],
-
   "minimum-stability": "stable",
   "extra": {
     "laravel": {
       "providers": [
         "Heath\\BandwidthCheck\\BandwidthCheckServiceProvider"
       ]
+    }
+  },
+  "config": {
+    "allow-plugins": {
+      "kylekatarnls/update-helper": true
     }
   }
 }
