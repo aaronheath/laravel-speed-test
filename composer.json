@@ -16,7 +16,7 @@
     "guzzlehttp/guzzle": "^7.8.0",
     "ext-json": "*",
     "aaronheath/class-logger": "^1.2.0",
-    "aaronheath/oauth-client": "dev-20230919-laravel-10"
+    "aaronheath/oauth-client": "^1.0.0"
   },
   "autoload": {
     "psr-4": {

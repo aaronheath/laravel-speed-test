@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "0a6f956f1d734a014eaf90c21976bf26",
+    "content-hash": "52f527bb4f81e762cb4812dfed0ccda7",
     "packages": [
         {
             "name": "aaronheath/class-logger",
@@ -63,22 +63,22 @@
         },
         {
             "name": "aaronheath/oauth-client",
-            "version": "dev-20230919-laravel-10",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/aaronheath/oauth-client.git",
-                "reference": "c7e8a9f1fc52bb4b3799683c40ae11c6002d598d"
+                "reference": "cece09e7f34c9021c5fdb535f4f9c62137ac9ff8"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/aaronheath/oauth-client/zipball/c7e8a9f1fc52bb4b3799683c40ae11c6002d598d",
-                "reference": "c7e8a9f1fc52bb4b3799683c40ae11c6002d598d",
+                "url": "https://api.github.com/repos/aaronheath/oauth-client/zipball/cece09e7f34c9021c5fdb535f4f9c62137ac9ff8",
+                "reference": "cece09e7f34c9021c5fdb535f4f9c62137ac9ff8",
                 "shasum": ""
             },
             "require": {
                 "aaronheath/class-logger": "^1.2.0",
                 "ext-json": "*",
-                "guzzlehttp/guzzle": "^7.8",
+                "guzzlehttp/guzzle": "^7.8.0",
                 "illuminate/support": "^10.0.0",
                 "php": "^8.2.0"
             },
@@ -118,9 +118,9 @@
             ],
             "support": {
                 "issues": "https://github.com/aaronheath/oauth-client/issues",
-                "source": "https://github.com/aaronheath/oauth-client/tree/20230919-laravel-10"
+                "source": "https://github.com/aaronheath/oauth-client/tree/v1.0.0"
             },
-            "time": "2023-09-30T23:29:29+00:00"
+            "time": "2023-10-01T07:56:49+00:00"
         },
         {
             "name": "brick/math",
@@ -8721,9 +8721,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "aaronheath/oauth-client": 20
-    },
+    "stability-flags": [],
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -8731,5 +8729,5 @@
         "ext-json": "*"
     },
     "platform-dev": [],
-    "plugin-api-version": "2.2.0"
+    "plugin-api-version": "2.3.0"
 }
