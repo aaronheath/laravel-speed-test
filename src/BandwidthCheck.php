@@ -13,6 +13,7 @@ class BandwidthCheck
 
     protected $url;
     protected $enabled;
+    protected $runner;
     protected $client;
     protected $oauthClient;
 
@@ -23,6 +24,7 @@ class BandwidthCheck
 
         $this->enabled = config('bandwidth-check.enabled');
         $this->url = config('bandwidth-check.report_url');
+        $this->runner = config('bandwidth-check.runner');
     }
 
     public function run()
@@ -52,12 +54,12 @@ class BandwidthCheck
 
         do {
             if($loop >= 5) {
-                throw new \Exception('Exeeded speed test attempts');
+                throw new \Exception('Exceeded speed test attempts');
             }
 
             $loop++;
 
-            $result = exec('speedtest --format=json');
+            $result = exec($this->cmd());
 
             if($result) {
                 $json = json_decode($result);
@@ -69,6 +71,13 @@ class BandwidthCheck
         } while(! $hasValidResult);
 
         return $json;
+    }
+
+    protected function cmd()
+    {
+        return $this->runner === 'docker'
+            ? 'docker run --rm -it gists/speedtest-cli speedtest --accept-license --format=json'
+            : 'speedtest --accept-license --format=json';
     }
 
     protected function results($rawResults)
