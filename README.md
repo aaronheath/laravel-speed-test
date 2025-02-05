@@ -48,8 +48,7 @@ Finally, you'll want to configure the bandwidth checker by updating the projects
 ```text
 BANDWIDTH_CHECK_ENABLED=true
 BANDWIDTH_CHECK_REPORT_URL=https://example.com/api/bandwidth-check
-BANDWIDTH_CHECK_DOWNLOAD_URL=https://example.com/50MB.file
-BANDWIDTH_CHECK_FILESIZE=50
+BANDWIDTH_CHECK_RUNNER=docker # or system
 ```
 ## Performing Bandwidth Checks
 
