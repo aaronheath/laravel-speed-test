@@ -6,6 +6,7 @@ use Heath\ClassLogger\ClassLogger;
 use Heath\OauthClient\OauthClient;
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Process;
 
 class BandwidthCheck
 {
@@ -58,6 +59,16 @@ class BandwidthCheck
             }
 
             $loop++;
+
+            $process = Process::timeout(120)->run($this->cmd());
+
+            dd([
+                'successful' => $process->successful(),
+                'failed' => $process->failed(),
+                'exitCode' => $process->exitCode(),
+                'output' => $process->output(),
+                'errorOutput' => $process->errorOutput(),
+            ]);
 
             $result = exec($this->cmd());
 
