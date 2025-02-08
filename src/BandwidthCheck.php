@@ -62,16 +62,6 @@ class BandwidthCheck
 
             $process = Process::timeout(120)->run($this->cmd());
 
-//            dd([
-//                'successful' => $process->successful(),
-//                'failed' => $process->failed(),
-//                'exitCode' => $process->exitCode(),
-//                'output' => $process->output(),
-//                'errorOutput' => $process->errorOutput(),
-//            ]);
-
-            $result = exec($this->cmd());
-
             if($process->successful()) {
                 $json = json_decode($process->output());
 
@@ -87,7 +77,6 @@ class BandwidthCheck
     protected function cmd()
     {
         return $this->runner === 'docker'
-//            ? 'docker run --rm -it gists/speedtest-cli speedtest --accept-license --format=json'
             ? 'docker run --rm gists/speedtest-cli speedtest --accept-license --format=json'
             : 'speedtest --accept-license --format=json';
     }
