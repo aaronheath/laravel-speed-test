@@ -62,18 +62,18 @@ class BandwidthCheck
 
             $process = Process::timeout(120)->run($this->cmd());
 
-            dd([
-                'successful' => $process->successful(),
-                'failed' => $process->failed(),
-                'exitCode' => $process->exitCode(),
-                'output' => $process->output(),
-                'errorOutput' => $process->errorOutput(),
-            ]);
+//            dd([
+//                'successful' => $process->successful(),
+//                'failed' => $process->failed(),
+//                'exitCode' => $process->exitCode(),
+//                'output' => $process->output(),
+//                'errorOutput' => $process->errorOutput(),
+//            ]);
 
             $result = exec($this->cmd());
 
-            if($result) {
-                $json = json_decode($result);
+            if($process->successful()) {
+                $json = json_decode($process->output());
 
                 if(property_exists($json, 'download')) {
                     $hasValidResult = true;
