@@ -87,7 +87,8 @@ class BandwidthCheck
     protected function cmd()
     {
         return $this->runner === 'docker'
-            ? 'docker run --rm -it gists/speedtest-cli speedtest --accept-license --format=json'
+//            ? 'docker run --rm -it gists/speedtest-cli speedtest --accept-license --format=json'
+            ? 'docker run --rm gists/speedtest-cli speedtest --accept-license --format=json'
             : 'speedtest --accept-license --format=json';
     }
 
