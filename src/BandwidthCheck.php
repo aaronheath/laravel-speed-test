@@ -6,6 +6,7 @@ use Heath\ClassLogger\ClassLogger;
 use Heath\OauthClient\OauthClient;
 use GuzzleHttp\Client;
 use Illuminate\Support\Arr;
+use Illuminate\Support\Facades\Process;
 
 class BandwidthCheck
 {
@@ -59,10 +60,10 @@ class BandwidthCheck
 
             $loop++;
 
-            $result = exec($this->cmd());
+            $process = Process::timeout(120)->run($this->cmd());
 
-            if($result) {
-                $json = json_decode($result);
+            if($process->successful()) {
+                $json = json_decode($process->output());
 
                 if(property_exists($json, 'download')) {
                     $hasValidResult = true;
@@ -76,7 +77,7 @@ class BandwidthCheck
     protected function cmd()
     {
         return $this->runner === 'docker'
-            ? 'docker run --rm -it gists/speedtest-cli speedtest --accept-license --format=json'
+            ? 'docker run --rm gists/speedtest-cli speedtest --accept-license --format=json'
             : 'speedtest --accept-license --format=json';
     }
 
